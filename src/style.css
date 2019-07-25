@@ -1,0 +1,17 @@
+.f-form-item{
+    padding:6px 0;
+}
+.form-item_label{
+    margin-right: 6px;
+    font-size: 14px;
+    padding-left:12px;
+    position: relative;
+}
+.form-item_label_required{
+    position: absolute;
+    top:25%;
+    left: 0;
+    color: red;
+    vertical-align: middle;
+    line-height: 1em;
+}
