@@ -1,6 +1,34 @@
 .f-form-item{
     padding:6px 0;
 }
+.form-item.error{
+    display: inline-block;
+    padding-bottom:22px;
+    position: relative;
+}
+.form-item_error{
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: left;
+}
+.form-item.error input{
+    border: 1px solid red;
+    -webkit-tap-highlight-color:transparent;
+}
+.form-item input::-webkit-autofill{
+    background-color: #fff;
+}
+.form-item input::-internal-autofill-selected{
+    background-color: #fff;
+}
+.form-item input{
+    padding:4px;
+    border-radius: 4px;
+}
 .form-item_label{
     margin-right: 6px;
     font-size: 14px;

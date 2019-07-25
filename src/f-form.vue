@@ -11,7 +11,8 @@ export default {
     name:"fForm",
     data(){
         return {
-            childName:"fFormItem"
+            childName:"fFormItem",
+            timer:null
         }
     },
     props:{
@@ -57,7 +58,51 @@ export default {
                     break
                 }
             }
-            callback && callback(error,this.rules)
+
+            if(error){
+                callback && callback(error,{})
+            }else{
+                let res = this.getFieldsValue()
+                callback && callback(error,res)
+            }
+        },
+        getFieldsValue(name = null){
+            let res = {}
+            let children = this.getChildrenInput()
+            children.forEach(v=>{
+                if(name){
+                    let inputKey = v.$parent.value
+                    if(typeof name === 'object' && name instanceof Array){
+                        if(name.includes(inputKey)){
+                            res[inputKey] = v.$refs.input.value
+                        }
+                    }else if(typeof name === 'string'){
+                        if(v.$parent.value === name){
+                            res[inputKey] = v.$refs.input.value
+                        }
+                    }
+                }else{
+                    res[v.$parent.value] = v.$refs.input.value
+                }
+            })
+            return res
+        },
+        getChildrenInput(){
+            let children = this.$children
+            let res = []
+            function deep(children){
+                children.forEach(v=>{
+                    if(v.$options.name === 'fInput'){
+                        res.push(v) 
+                    }else{
+                        if(v.$children.length){
+                            deep(v.$children)
+                        }
+                    }
+                })
+            }
+            deep(children)
+            return res
         }
     }
 }

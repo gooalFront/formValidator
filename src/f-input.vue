@@ -1,9 +1,10 @@
 <template>
     <input class="f-input" 
+    ref="input"
     @[trigger]="handleTrigger" 
-    @input="handleInput"
+    @keyup="handleKeyup"
     :value="rule.value"
-    AUTOCOMPLETE="off" 
+    autocomplete="off" 
     :type="type">
 </template>
 
@@ -39,22 +40,33 @@ export default {
     created(){
         this.$on('recive-from-item',(...params)=>{
             this.rule = Object.assign(this.rule,params[0])
-            this.value = params[1]
+            let error = this.validateInput(params[1])
+            if(error){
+                throw new Error('input initialValue in not suit the pattern')
+            }else{
+                this.value = params[1]
+            }
         })
     },
     methods:{
         handleTrigger(e){
+            this.validateInput(e.target.value)
+        },
+        validateInput(value){
             if(this.rule.required && this.rule.pattern){
-                if(!this.rule.pattern.test(e.target.value)){
+                if(!this.rule.pattern.test(value)){
                     this.dispatch('fFormItem','inputvaliderror')
+                    return true
                 }else{
                     this.dispatch('fFormItem','inputvalidnoerror')
+                    return false
                 }
             }
+            return false
         },
-        handleInput(){
-            if(this.formatter){
-
+        handleKeyup(e){
+            if(this.rule.formatter){
+                e.target.value = this.rule.formatter(e.target.value)
             }
         }
     }

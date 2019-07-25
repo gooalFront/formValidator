@@ -1,11 +1,10 @@
 <template>
     <div class="f-form-item" :name="label">
         <span class="form-item_label"><b v-if="rule.required" class="form-item_label_required">*</b>{{label}}</span>
-        <span class="fom-item">
+        <span class="form-item" :class="{error:rule.error}">
             <slot></slot>
+            <span v-if="rule.error" class="form-item_error">{{rule.errorMsg}}</span>
         </span>
-        <br>
-        <span v-if="rule.error" class="form-item_error">{{rule.errorMsg}}</span>
     </div>
 </template>
 
