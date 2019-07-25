@@ -11,6 +11,10 @@
     "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bugs": {
+    "url": "https://github.com/YeahPotato/formValidator/issues"
+  },
+  "homepage": "https://github.com/YeahPotato/formValidator",
   "keywords": [
     "vue",
     "from",
