@@ -1,6 +1,6 @@
 {
   "name": "f-form-validator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "custom form validator for vue",
   "main": "index.js",
   "directories": {
